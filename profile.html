@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadet Profile | BMARPC Air Wing</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0a2540;
+      --accent: #d4af37;
+      --accent-hover: #c19b2e;
+      --bg: #f4f6f9;
+      --white: #ffffff;
+      --text: #2c3e50;
+      --text-muted: #627d98;
+      --border: #e2e8f0;
+      --radius: 10px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+    .profile-container {
+      max-width: 900px;
+      margin: 4rem auto;
+      padding: 0 1.5rem;
+    }
+    .profile-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .profile-header h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2rem;
+      color: var(--primary);
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+    }
+    .profile-header p { color: var(--text-muted); font-size: 1.1rem; }
+    .profile-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .rank-badge {
+      background: var(--primary);
+      color: var(--accent);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 800;
+      padding: 1rem 2rem;
+      display: inline-block;
+      border-radius: 0 0 var(--radius) var(--radius);
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    .profile-details { padding: 2.5rem; }
+    .cv-section {
+      margin-bottom: 2.5rem;
+    }
+    .cv-section h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.3rem;
+      color: var(--primary);
+      padding-bottom: 0.75rem;
+      border-bottom: 2px dashed var(--border);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .cv-section h3 i { color: var(--accent); }
+    .cv-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .cv-item {
+      flex: 1;
+      min-width: 180px;
+    }
+    .cv-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.3rem;
+      font-weight: 600;
+    }
+    .cv-value {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.15rem;
+      color: var(--text);
+      font-weight: 600;
+    }
+    .last-updated {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+    .real-time-status {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+    .status-item {
+      text-align: center;
+    }
+    .status-item i {
+      font-size: 1.5rem;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    .status-item p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+    .logout-btn {
+      display: block;
+      margin: 3rem auto 0;
+      padding: 0.85rem 2.5rem;
+      background: var(--primary);
+      color: var(--accent);
+      border: none;
+      border-radius: var(--radius);
+      font-weight: 600;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: var(--transition);
+      text-decoration: none;
+      text-align: center;
+    }
+    .logout-btn:hover { background: var(--primary-light); }
+  </style>
+</head>
+<body>
+  <div class="profile-container">
+    <div class="profile-header">
+      <h1><i class="fas fa-user-shield"></i> Cadet Profile</h1>
+      <p>Welcome to your BMARPC Air Wing profile</p>
+    </div>
+    <div class="profile-card">
+      <div class="rank-badge" id="profileBadge">Cadet</div>
+      <div class="profile-details">
+        <div class="cv-section">
+          <h3><i class="fas fa-user"></i> Personal Information</h3>
+          <div class="cv-row">
+            <div class="cv-item">
+              <div class="cv-label">Full Name</div>
+              <div class="cv-value" id="profileName">-</div>
+            </div>
+            <div class="cv-item">
+              <div class="cv-label">Cadet No.</div>
+              <div class="cv-value" id="profileCadetNo">-</div>
+            </div>
+            <div class="cv-item">
+              <div class="cv-label">Sex</div>
+              <div class="cv-value" id="profileSex">-</div>
+            </div>
+            <div class="cv-item">
+              <div class="cv-label">Nationality</div>
+              <div class="cv-value" id="profileNationality">-</div>
+            </div>
+          </div>
+        </div>
+        <div class="cv-section">
+          <h3><i class="fas fa-globe"></i> Training Details</h3>
+          <div class="cv-row">
+            <div class="cv-item">
+              <div class="cv-label">Rank</div>
+              <div class="cv-value" id="profileRank">-</div>
+            </div>
+            <div class="cv-item">
+              <div class="cv-label">Roll/Section</div>
+              <div class="cv-value" id="profileRollSec">-</div>
+            </div>
+            <div class="cv-item">
+              <div class="cv-label">Batch</div>
+              <div class="cv-value" id="profileBatch">-</div>
+            </div>
+            <div class="cv-item">
+              <div class="cv-label">Shift</div>
+              <div class="cv-value" id="profileShift">-</div>
+            </div>
+          </div>
+        </div>
+        <div class="cv-section">
+          <h3><i class="fas fa-clock"></i> Real-Time Status</h3>
+          <div class="real-time-status">
+            <div class="status-item">
+              <i class="fas fa-clock"></i>
+              <p>Online</p>
+            </div>
+            <div class="status-item">
+              <i class="fas fa-user-check"></i>
+              <p id="attendance-status">Checking attendance...</p>
+            </div>
+            <div class="status-item">
+              <i class="fas fa-sync-alt"></i>
+              <p id="last-sync">Last sync: --</p>
+            </div>
+          </div>
+          <div class="last-updated" id="lastUpdated">
+            <p>Last updated: Checking...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button onclick="logout()" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+  </div>
+  <script>
+    function logout() {
+      localStorage.removeItem('bmarpc_cadet_token');
+      window.location.href = 'login.html';
+    }
+    function updateTime() {
+      const now = new Date();
+      document.getElementById('last-sync').textContent = 'Last sync: ' + now.toLocaleTimeString();
+    }
+    setInterval(updateTime, 1000);
+    const saved = localStorage.getItem('bmarpc_cadet_token');
+    if (saved) {
+      const { cadet } = JSON.parse(saved);
+      document.getElementById('profileBadge').textContent = cadet.rank;
+      document.getElementById('profileName').textContent = cadet.name;
+      document.getElementById('profileCadetNo').textContent = cadet.cadetNo;
+      document.getElementById('profileRollSec').textContent = cadet.rollSec || 'N/A';
+      document.getElementById('profileBatch').textContent = cadet.batch || 'N/A';
+      document.getElementById('profileShift').textContent = cadet.shift;
+      document.getElementById('profileNationality').textContent = cadet.nationality;
+      document.getElementById('profileSex').textContent = cadet.sex;
+      document.getElementById('profileRank').textContent = cadet.rank;
+      document.getElementById('lastUpdated').innerHTML = '<p>Last updated: ' + new Date().toLocaleString() + '</p>';
+      if (cadet.attendance && cadet.attendance.length > 0) {
+        const latest = cadet.attendance[cadet.attendance.length - 1];
+        document.getElementById('attendance-status').innerHTML = '<i class="fas fa-user-' + (latest.status === 'Present' ? 'check' : 'times') + '"></i> ' + latest.status;
+      }
+    } else {
+      window.location.href = 'login.html';
+    }
+  </script>
+</body>
+</html>

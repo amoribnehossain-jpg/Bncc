@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BNCC Cadet Login | BMARPC Air Wing</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0a2540;
+      --accent: #d4af37;
+      --accent-hover: #c19b2e;
+      --bg: #f4f6f9;
+      --white: #ffffff;
+      --text: #2c3e50;
+      --text-muted: #627d98;
+      --border: #e2e8f0;
+      --radius: 8px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Open Sans', sans-serif;
+      min-height: 100vh;
+      background: url('images/background.jpeg') center/cover no-repeat fixed;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .login-page {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+      overflow: hidden;
+      max-width: 900px;
+      width: 100%;
+      display: flex;
+    }
+    .login-image {
+      flex: 1;
+      background: linear-gradient(135deg, rgba(10,37,64,0.6), rgba(24,59,86,0.7)),
+                  url('images/background.jpeg') center/cover no-repeat;
+      min-height: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      text-align: center;
+      padding: 2rem;
+    }
+    .logo-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .logo-container img {
+      width: 120px;
+      height: 120px;
+      object-fit: contain;
+      cursor: pointer;
+      filter: drop-shadow(0 4px 15px rgba(0,0,0,0.3));
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .logo-container img:hover {
+      transform: scale(1.05);
+      filter: drop-shadow(0 6px 20px rgba(0,0,0,0.4));
+    }
+    .logo-container h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight:800;
+      margin: 0;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
+    .logo-container p {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(0.9rem, 2.5vw, 1.15rem);
+      opacity: 0.95;
+      max-width: 350px;
+      margin: 0 auto;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+    }
+    .login-form-container {
+      flex: 1;
+      padding: 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: var(--white);
+    }
+    .login-header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+    .login-header h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2rem;
+      color: var(--primary);
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    .login-header p { color: var(--text-muted); font-size: 1.05rem; }
+    .form-group { margin-bottom: 1.5rem; }
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--primary);
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 1rem 1.25rem;
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 1rem;
+      transition: var(--transition);
+      outline: none;
+      background: var(--white);
+    }
+    .form-group input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.25);
+    }
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 1rem;
+      border-radius: var(--radius);
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: var(--transition);
+      border: none;
+      color: var(--primary);
+    }
+    .btn-primary {
+      background: var(--accent);
+    }
+    .btn-primary:hover { background: var(--accent-hover); transform: translateY(-2px); }
+    .response { text-align: center; margin-top: 1rem; font-weight: 600; }
+    .response.error { color: #ff6b6b; }
+    .response.success { color: #2e7d32; }
+    @media (max-width: 768px) {
+      .login-page { flex-direction: column; }
+      .login-image { min-height: 300px; }
+      .login-form-container { padding: 2rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="login-page">
+    <div class="login-image">
+      <div class="logo-container">
+        <img src="images/Bncc Logo.jpg" alt="BNCC Logo">
+        <h2>BMARPC BNCC Air Wing</h2>
+        <p>Soaring Higher, Reaching New Heights – Train, Lead, Soar!</p>
+      </div>
+    </div>
+    <div class="login-form-container">
+      <div class="login-header">
+        <h1><i class="fas fa-plane"></i> Cadet Portal</h1>
+        <p>Access your profile and training details</p>
+      </div>
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="name"><i class="fas fa-user"></i> Full Name</label>
+          <input type="text" id="name" placeholder="Enter your name" required>
+        </div>
+        <div class="form-group">
+          <label for="cadetNo"><i class="fas fa-id-badge"></i> Cadet No.</label>
+          <input type="text" id="cadetNo" placeholder="Enter your cadet number" required>
+        </div>
+        <div class="form-group">
+          <label for="password"><i class="fas fa-lock"></i> Password</label>
+          <input type="password" id="password" placeholder="Enter password" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+        <p id="response" class="response"></p>
+      </form>
+    </div>
+  </div>
+  <script>
+    const loginForm = document.getElementById('loginForm');
+    const response = document.getElementById('response');
+    const API_URL = 'http://localhost:3000';
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = loginForm.querySelector('button');
+      btn.textContent = 'Logging in...';
+      btn.disabled = true;
+      const name = document.getElementById('name').value;
+      const cadetNo = document.getElementById('cadetNo').value;
+      const password = document.getElementById('password').value;
+      try {
+        const res = await fetch(API_URL + '/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, cadetNo, password })
+        });
+        const data = await res.json();
+        if (res.ok) {
+          localStorage.setItem('bmarpc_cadet_token', JSON.stringify({ token: data.token, cadet: data.cadet }));
+          response.innerHTML = '<span class="response success">Login successful! Redirecting...</span>';
+          setTimeout(() => window.location.href = 'profile.html', 1500);
+        } else {
+          response.innerHTML = '<span class="response error">' + data.error + '</span>';
+        }
+      } catch (err) {
+        response.innerHTML = '<span class="response error">Server unavailable. Using demo mode.</span>';
+        const demoCadets = {
+          '25561220': { name: 'Amor Ibne Hossain', cadetNo: '25561220', rollSec: '3279 H', batch: '2027', rank: 'Cadet Lance Corporal', shift: 'BV', nationality: 'Bangladeshi', sex: 'Male' },
+          '002': { name: 'Jane Smith', cadetNo: '002', rollSec: '11B', batch: '01', rank: 'SGT', shift: 'BV', nationality: 'Bangladeshi', sex: 'Female' },
+          '001': { name: 'John Doe', cadetNo: '001', rollSec: '12A', batch: '02', rank: 'CUO', shift: 'EV', nationality: 'Bangladeshi', sex: 'Male' }
+        };
+        const cadet = demoCadets[cadetNo] || { 
+          name, 
+          cadetNo, 
+          rollSec: '12A', 
+          batch: '02', 
+          rank: 'Cadet', 
+          shift: 'EV', 
+          nationality: 'Bangladeshi', 
+          sex: 'Male' 
+        };
+        localStorage.setItem('bmarpc_cadet_token', JSON.stringify({ token: 'demo', cadet }));
+        setTimeout(() => window.location.href = 'profile.html', 1500);
+      }
+      btn.textContent = 'Login';
+      btn.disabled = false;
+    });
+  </script>
+</body>
+</html>
