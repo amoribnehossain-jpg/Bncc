@@ -57,6 +57,9 @@ async function initializeUsers() {
   });
 }
 
+app.get('/', (req, res) => res.send('Server running'));
+app.get('/health', (req, res) => res.json({ status: 'ok' }));
+
 app.post('/login', async (req, res) => {
   const { name, cadetNo, password } = req.body;
   
@@ -128,6 +131,6 @@ app.post('/register', async (req, res) => {
   res.status(201).json({ message: 'User registered successfully', cadetNo });
 });
 
-initializeUsers().then(() => {
-  app.listen(3000, () => console.log('Server running on port 3000'));
-});
+initializeUsers();
+
+module.exports = app;
