@@ -133,4 +133,9 @@ app.post('/register', async (req, res) => {
 
 initializeUsers();
 
+const PORT = process.env.PORT || 3000;
+if (require.main === module) {
+  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+}
+
 module.exports = app;
