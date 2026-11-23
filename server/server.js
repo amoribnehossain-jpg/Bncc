@@ -4,51 +4,58 @@ const bcrypt = require('bcrypt');
 const cors = require('cors');
 
 const app = express();
-app.use(cors({ origin: true }));
+app.use(cors());
 app.use(express.json());
 
 const BCRYPT_SALT_ROUNDS = 10;
+const DEFAULT_PASSWORD = 'password';
 
 const users = new Map();
-users.set('001', {
-  name: 'John Doe',
-  cadetNo: '001',
-  password: null,
-  rollSec: '12A',
-  batch: '02',
-  rank: 'CUO',
-  shift: 'EV',
-  nationality: 'Bangladeshi',
-  sex: 'Male',
-  attendance: [{ date: '2026-11-20', status: 'Present' }, { date: '2026-11-21', status: 'Present' }],
-  lastUpdated: new Date().toISOString()
-});
-users.set('002', {
-  name: 'Jane Smith',
-  cadetNo: '002',
-  password: null,
-  rollSec: '11B',
-  batch: '01',
-  rank: 'SGT',
-  shift: 'BV',
-  nationality: 'Bangladeshi',
-  sex: 'Female',
-  attendance: [{ date: '2026-11-20', status: 'Absent' }, { date: '2026-11-21', status: 'Present' }],
-  lastUpdated: new Date().toISOString()
-});
-users.set('25561220', {
-  name: 'Amor Ibne Hossain',
-  cadetNo: '25561220',
-  password: null,
-  rollSec: '3279 H',
-  batch: '2027',
-  rank: 'Cadet Lance Corporal',
-  shift: 'BV',
-  nationality: 'Bangladeshi',
-  sex: 'Male',
-  attendance: [],
-  lastUpdated: new Date().toISOString()
-});
+let defaultPasswordHash = null;
+
+async function initializeUsers() {
+  defaultPasswordHash = await bcrypt.hash(DEFAULT_PASSWORD, BCRYPT_SALT_ROUNDS);
+  
+  users.set('001', {
+    name: 'John Doe',
+    cadetNo: '001',
+    password: defaultPasswordHash,
+    rollSec: '12A',
+    batch: '02',
+    rank: 'CUO',
+    shift: 'EV',
+    nationality: 'Bangladeshi',
+    sex: 'Male',
+    attendance: [{ date: '2026-11-20', status: 'Present' }, { date: '2026-11-21', status: 'Present' }],
+    lastUpdated: new Date().toISOString()
+  });
+  users.set('002', {
+    name: 'Jane Smith',
+    cadetNo: '002',
+    password: defaultPasswordHash,
+    rollSec: '11B',
+    batch: '01',
+    rank: 'SGT',
+    shift: 'BV',
+    nationality: 'Bangladeshi',
+    sex: 'Female',
+    attendance: [{ date: '2026-11-20', status: 'Absent' }, { date: '2026-11-21', status: 'Present' }],
+    lastUpdated: new Date().toISOString()
+  });
+  users.set('25561220', {
+    name: 'Amor Ibne Hossain',
+    cadetNo: '25561220',
+    password: defaultPasswordHash,
+    rollSec: '3279 H',
+    batch: '2027',
+    rank: 'Cadet Lance Corporal',
+    shift: 'BV',
+    nationality: 'Bangladeshi',
+    sex: 'Male',
+    attendance: [],
+    lastUpdated: new Date().toISOString()
+  });
+}
 
 app.post('/login', async (req, res) => {
   const { name, cadetNo, password } = req.body;
@@ -66,14 +73,10 @@ app.post('/login', async (req, res) => {
     return res.status(401).json({ error: 'Invalid credentials' });
   }
 
-  if (!user.password) {
-    user.password = password;
-  }
-
   const isValid = await bcrypt.compare(password, user.password);
   
   if (isValid) {
-    const token = Buffer.from(`${user.cadetNo}:${user.password}`).toString('base64');
+    const token = Buffer.from(user.cadetNo).toString('base64');
     res.json({ 
       message: 'Login successful',
       token: token,
@@ -125,4 +128,6 @@ app.post('/register', async (req, res) => {
   res.status(201).json({ message: 'User registered successfully', cadetNo });
 });
 
-app.listen(3000, () => console.log('Server running on port 3000'));
+initializeUsers().then(() => {
+  app.listen(3000, () => console.log('Server running on port 3000'));
+});
