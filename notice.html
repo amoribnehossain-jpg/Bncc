@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notices & Announcements | BMARPC BNCC Air Wing</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Notice Page Specific Styles */
+    .notice-banner {
+      position: relative;
+      max-height: 350px;
+      min-height: 350px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: url('images/hero-jets.jpeg') center center no-repeat;
+      background-size: cover;
+      overflow: hidden;
+    }
+
+    .notice-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.7);
+    }
+
+    .notice-banner-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .notice-banner-content h1 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      color: var(--white);
+      margin-bottom: 0.75rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .notice-banner-content p {
+      font-size: 1.05rem;
+      color: rgba(255, 255, 255, 0.8);
+      font-weight: 400;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .notice-content {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem;
+    }
+
+    .notice-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--sky);
+      border-radius: var(--radius);
+      padding: 2rem 2rem 2rem 2.25rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .notice-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .notice-date {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.5rem;
+    }
+
+    .notice-category {
+      display: inline-block;
+      background: var(--sky-light);
+      color: var(--sky-dark);
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      padding: 0.25rem 0.7rem;
+      border-radius: 50px;
+      margin-bottom: 0.75rem;
+    }
+
+    .notice-category.urgent {
+      background: #fef2f2;
+      color: #dc2626;
+    }
+
+    .notice-category.training {
+      background: var(--sky-light);
+      color: var(--sky-dark);
+    }
+
+    .notice-category.general {
+      background: #f0fdf4;
+      color: #16a34a;
+    }
+
+    .notice-title {
+      font-size: 1.2rem;
+      color: var(--heading);
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+    }
+
+    .notice-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 1.25rem;
+    }
+
+    .notice-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--sky);
+      color: var(--white);
+      font-weight: 600;
+      font-size: 0.88rem;
+      padding: 0.6rem 1.4rem;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: var(--transition);
+      border: 2px solid transparent;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .notice-btn:hover {
+      background: var(--sky-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(56, 189, 248, 0.3);
+    }
+
+    .notice-card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 768px) {
+      .notice-content {
+        padding: 3rem 1rem;
+      }
+      .notice-card {
+        padding: 1.5rem 1.25rem 1.5rem 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="container top-bar-flex">
+      <div class="contact-info">
+        <span><i class="fas fa-envelope"></i> info@abdurroufcollege.ac.bd</span>
+        <span><i class="fas fa-phone"></i> +880 1640-610887</span>
+        <span><i class="fas fa-user-shield"></i> Abrar Ahnaf Rhyme [In-Charge]</span>
+        <span><i class="fas fa-plane"></i> 12 No. Flight | 56 BNCC Squadron (Dhaka Sqn)</span>
+      </div>
+      <div class="social-links">
+        <a href="https://www.facebook.com/bmarpcairwingcontingentofficial" target="_blank" title="Facebook Page"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/bncc_air_wing_junior_bmarpc" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.bncc.info" target="_blank" title="BNCC HQ"><i class="fas fa-globe"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header / Navigation -->
+  <header class="header">
+    <div class="container nav-container">
+      <a href="https://www.abdurroufcollege.ac.bd/" target="_blank" class="brand">
+        <div class="logo-placeholder"><img src="images/BMARPC.jpg" alt="BMARPC" style="width:100%;height:100%;object-fit:contain;"></div>
+        <div class="brand-text">
+          <h1>BMARPC AIR WING</h1>
+          <p>BNCC 12 No. Flight &bull; 56 Sqn Dhaka</p>
+        </div>
+      </a>
+      <nav class="nav-menu">
+        <a href="index.html#home">Home</a>
+        <a href="index.html#about">About</a>
+        <a href="index.html#structure">Command</a>
+        <a href="history.html">History</a>
+        <a href="index.html#activities">Activities</a>
+        <a href="notice.html" class="active">Notice</a>
+        <a href="index.html#ranks">Ranks</a>
+        <a href="index.html#gallery">Gallery</a>
+        <a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a>
+        <a href="index.html#contact" class="btn-nav">Join Platoon</a>
+      </nav>
+      <div class="hamburger">
+        <i class="fas fa-bars"></i>
+      </div>
+    </div>
+  </header>
+
+  <!-- Notice Banner -->
+  <div class="notice-banner">
+    <div class="notice-banner-content">
+      <h1>Notices &amp; Announcements</h1>
+      <p>Stay updated with the latest BMARPC Air Wing information.</p>
+    </div>
+  </div>
+
+  <!-- Notice Content -->
+  <div class="notice-content">
+    <div class="notice-card">
+      <div class="notice-card-header">
+        <span class="notice-category training">Training</span>
+        <span class="notice-date">Nov 25, 2026</span>
+      </div>
+      <h3 class="notice-title">Upcoming Annual Training Camp</h3>
+      <p class="notice-desc">The 2026 Annual Central Training Camp will commence on December 15, 2026 at BAF Central Training Camp. All Air Wing cadets are required to report in full uniform. A pre-camp medical checkup will be conducted on December 12.</p>
+      <a href="#" class="notice-btn"><i class="fas fa-arrow-right"></i> Read More</a>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-flex">
+      <p>&copy; 2026 BMARPC BNCC Air Wing (12 No. Flight, 56 BNCC Squadron). All Rights Reserved.</p>
+      <p>বাংলার আকাশ রাখিব মুক্ত &bull; Touch the Sky with Honor</p>
+      <p>In-Charge: Abrar Ahnaf Rhyme</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

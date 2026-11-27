@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BMARPC BNCC Air Wing | Official Flight Website</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="container top-bar-flex">
+      <div class="contact-info">
+        <span><i class="fas fa-envelope"></i> info@abdurroufcollege.ac.bd</span>
+        <span><i class="fas fa-phone"></i> +880 1640-610887</span>
+        <span><i class="fas fa-user-shield"></i> Abrar Ahnaf Rhyme [In-Charge]</span>
+        <span><i class="fas fa-plane"></i> 12 No. Flight | 56 BNCC Squadron (Dhaka Sqn)</span>
+      </div>
+      <div class="social-links">
+        <a href="https://www.facebook.com/bmarpcairwingcontingentofficial" target="_blank" title="Facebook Page"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/bncc_air_wing_junior_bmarpc" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.bncc.info" target="_blank" title="BNCC HQ"><i class="fas fa-globe"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header / Navigation -->
+  <header class="header">
+    <div class="container nav-container">
+      <a href="https://www.abdurroufcollege.ac.bd/" target="_blank" class="brand">
+        <div class="logo-placeholder"><img src="images/BMARPC.jpg" alt="BMARPC" style="width:100%;height:100%;object-fit:contain;"></div>
+        <div class="brand-text">
+          <h1>BMARPC AIR WING</h1>
+          <p>BNCC 12 No. Flight &bull; 56 Sqn Dhaka</p>
+        </div>
+      </a>
+      <nav class="nav-menu">
+        <a href="#home" class="active">Home</a>
+        <a href="#about">About</a>
+        <a href="#structure">Command</a>
+        <a href="history.html">History</a>
+        <a href="#activities">Activities</a>
+        <a href="notice.html">Notice</a>
+        <a href="#ranks">Ranks</a>
+        <a href="#gallery">Gallery</a>
+        <a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a>
+        <a href="#contact" class="btn-nav">Join Platoon</a>
+      </nav>
+      <div class="hamburger">
+        <i class="fas fa-bars"></i>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section (Split Layout) -->
+  <section id="home" class="hero">
+    <div class="hero-left">
+      <a href="https://www.bncc.info/" target="_blank"><img src="images/bncc-logo.jpg" alt="BNCC Logo" class="hero-logo"></a>
+      <h1>BMARPC BNCC Air Wing</h1>
+      <p class="hero-bengali">বাংলার আকাশ রাখিব মুক্ত</p>
+      <p class="hero-description">Official Air Wing Contingent (12 No. Flight, 56 BNCC Squadron Dhaka). Training young minds with aviation excellence, discipline, and absolute patriotism.</p>
+      <div class="hero-buttons">
+        <a href="#contact" class="btn btn-primary">Enlist Now</a>
+        <a href="#about" class="btn btn-secondary">Discover Flight</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <img src="images/hero-jets.jpeg" alt="Fighter Jets" class="hero-image">
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="section">
+    <div class="container">
+      <div class="section-header scroll-reveal-up">
+        <h2>About BMARPC Air Wing</h2>
+        <div class="underline"></div>
+        <p>Part of Bangladesh National Cadet Corps (BNCC) – Second Line of Defense</p>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-text">
+          <h3>Excellence in Leadership, Aviation &amp; Service</h3>
+          <p>The Bangladesh National Cadet Corps (BNCC) Air Wing at <strong>Birshreshtha Munshi Abdur Rouf Public College (BMARPC)</strong>, located at the prestigious Peelkhana campus in Dhaka, is dedicated to shaping future leaders, officers, and responsible citizens.</p>
+          <p>Our cadets receive comprehensive training under military supervision from Bangladesh Air Force personnel and Cadet Under Officers. Training modules encompass aviation theory, aeromodelling, drill and ceremonial parades, weapon handling, map reading, navigation, meteorology, first aid, and community disaster relief operations.</p>
+          <div class="features-list">
+            <div class="feature-item"><i class="fas fa-check-circle"></i> Aeromodelling &amp; Flight Basics</div>
+            <div class="feature-item"><i class="fas fa-check-circle"></i> Annual Central Training Camps</div>
+            <div class="feature-item"><i class="fas fa-check-circle"></i> Inter-Squadron Competitions</div>
+            <div class="feature-item"><i class="fas fa-check-circle"></i> National Day Parades &amp; Salutes</div>
+            <div class="feature-item"><i class="fas fa-check-circle"></i> Social Services &amp; Blood Drives</div>
+            <div class="feature-item"><i class="fas fa-check-circle"></i> Youth Exchange Programs</div>
+          </div>
+        </div>
+        <div class="about-card-box">
+          <div class="stat-box">
+            <h3>12 No.</h3>
+            <p>Flight Unit</p>
+          </div>
+          <div class="stat-box">
+            <h3>56</h3>
+            <p>BNCC Squadron (Dhaka)</p>
+          </div>
+          <div class="stat-box">
+            <h3>1st</h3>
+            <p>Rank Discipline</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Goals Section -->
+  <section class="section bg-light">
+    <div class="container">
+      <div class="section-header scroll-reveal-up">
+        <h2>Our Goals</h2>
+        <div class="underline"></div>
+        <p>The core objectives that drive every cadet's journey in the Air Wing.</p>
+      </div>
+      <div class="goals-grid">
+        <div class="goal-card scroll-reveal-up stagger-1">
+          <i class="fas fa-bullseye"></i>
+          <h3>Cultivate Leadership</h3>
+          <p>To develop confident, disciplined, and capable leaders who can guide others in challenging situations.</p>
+        </div>
+        <div class="goal-card scroll-reveal-up stagger-2">
+          <i class="fas fa-flag"></i>
+          <h3>Instill Patriotism</h3>
+          <p>To foster a deep sense of loyalty, duty, and unwavering love for the nation and its people.</p>
+        </div>
+        <div class="goal-card scroll-reveal-up stagger-3">
+          <i class="fas fa-star"></i>
+          <h3>Promote Excellence</h3>
+          <p>To encourage physical fitness, mental resilience, and high academic standards among all cadets.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits Section -->
+  <section class="section bg-white">
+    <div class="container">
+      <div class="section-header scroll-reveal-up">
+        <h2>Benefits of Joining</h2>
+        <div class="underline"></div>
+        <p>What the Air Wing offers to its cadets</p>
+      </div>
+      <div class="benefits-grid">
+        <div class="benefit-card scroll-reveal-up stagger-1">
+          <i class="fas fa-user-shield"></i>
+          <h3>Leadership Development</h3>
+          <p>Train in command structures and earn ranks through merit-based promotion.</p>
+        </div>
+        <div class="benefit-card scroll-reveal-up stagger-2">
+          <i class="fas fa-plane"></i>
+          <h3>Aviation Exposure</h3>
+          <p>Learn aeromodelling, flight dynamics, and meet real aviation professionals.</p>
+        </div>
+        <div class="benefit-card scroll-reveal-up stagger-3">
+          <i class="fas fa-dumbbell"></i>
+          <h3>Physical Fitness</h3>
+          <p>Stay in peak condition with structured drills, PT, and outdoor training.</p>
+        </div>
+        <div class="benefit-card scroll-reveal-up stagger-4">
+          <i class="fas fa-hand-holding-heart"></i>
+          <h3>Community Service</h3>
+          <p>Contribute to society through disaster relief, blood drives, and civic programs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Leadership / Command Structure -->
+  <section id="structure" class="section bg-light">
+    <div class="container">
+      <div class="section-header scroll-reveal-up">
+        <h2>Command &amp; Leadership</h2>
+        <div class="underline"></div>
+        <p>Guided by esteemed patrons, military instructors, and cadet leaders.</p>
+      </div>
+
+      <div class="command-split">
+        <div class="command-image">
+          <img src="images/receiving-insignia.jpeg" alt="Receiving Insignia">
+        </div>
+        <div class="command-cards">
+          <div class="leader-card">
+            <div class="leader-img"><i class="fas fa-user-tie"></i></div>
+            <h3>Principal, BMARPC</h3>
+            <p class="role">Chief Patron</p>
+            <p>Providing ultimate administrative guidance and institutional support for the Air Wing contingent.</p>
+          </div>
+          <div class="leader-card">
+            <div class="leader-img"><i class="fas fa-jet-fighter"></i></div>
+            <h3>Officer Commanding (OC)</h3>
+            <p class="role">56 BNCC Squadron / Air Wing Instructor</p>
+            <p>Supervising military instruction, training syllabus, cadet evaluations, and annual camp readiness.</p>
+          </div>
+          <div class="leader-card">
+            <div class="leader-img"><i class="fas fa-user-shield"></i></div>
+            <h3>Cadet Under Officer (CUO)</h3>
+            <p class="role">Platoon Student Leader</p>
+            <p>Directing daily squadron operations, leading parade formations, and mentoring junior cadets.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Activities Section -->
+  <section id="activities" class="section">
+    <div class="container">
+      <div class="section-header scroll-reveal-up">
+        <h2>Training &amp; Activities</h2>
+        <div class="underline"></div>
+        <p>Core pillars of cadet development throughout the training year.</p>
+      </div>
+
+      <div class="grid-3">
+        <div class="card image-card">
+          <img src="images/jets-smoke.jpeg" alt="Aviation and Aeromodelling">
+          <div class="card-body">
+            <h3>Aviation &amp; Aeromodelling</h3>
+            <p>Study of flight dynamics, meteorology, radio communication, aircraft structures, and model aircraft building workshops.</p>
+          </div>
+        </div>
+        <div class="card image-card">
+          <img src="images/rifle-range.jpeg" alt="Annual Training Camps">
+          <div class="card-body">
+            <h3>Annual Training Camps</h3>
+            <p>Rigorous centralized training camps alongside Air Wing cadets from across Bangladesh, emphasizing tactical endurance and teamwork.</p>
+          </div>
+        </div>
+        <div class="card image-card">
+          <img src="images/parade-formation.jpg" alt="Parades and Ceremonies">
+          <div class="card-body">
+            <h3>Parades &amp; Ceremonies</h3>
+            <p>Representing BMARPC with pride during Independence Day, Victory Day parades, and prestigious institutional guard of honour events.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ranks & Uniforms Section -->
+  <section id="ranks" class="section bg-light">
+    <div class="container">
+      <div class="section-header scroll-reveal-up">
+        <h2>Air Wing Ranks &amp; Structure</h2>
+        <div class="underline"></div>
+        <p>Hierarchy of cadet leadership and officer appointments in the Air Wing.</p>
+      </div>
+
+      <div class="ranks-grid">
+        <div class="rank-box">
+          <div class="rank-badge">CUO</div>
+          <h4>Cadet Under Officer</h4>
+          <p>Senior student leader commanding the platoon.</p>
+        </div>
+        <div class="rank-box">
+          <div class="rank-badge">SGT</div>
+          <h4>Cadet Sergeant</h4>
+          <p>Supervises squad training and discipline.</p>
+        </div>
+        <div class="rank-box">
+          <div class="rank-badge">CPL</div>
+          <h4>Cadet Corporal</h4>
+          <p>Assists section leaders in drills and classes.</p>
+        </div>
+        <div class="rank-box">
+          <div class="rank-badge">LCPL</div>
+          <h4>Cadet Lance Corporal</h4>
+          <p>Junior leader guiding squad members.</p>
+        </div>
+        <div class="rank-box">
+          <div class="rank-badge">CDT</div>
+          <h4>Cadet</h4>
+          <p>Enrolled member undergoing foundational training.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Activities -->
+  <section class="section bg-light">
+    <div class="container">
+      <div class="section-header scroll-reveal-up">
+        <h2>Key Activities</h2>
+        <div class="underline"></div>
+        <p>Signature programs that define our training year</p>
+      </div>
+      <div class="activities-grid">
+        <div class="activity-card scroll-reveal-up stagger-1">
+          <img src="images/aerial-drill.jpg" alt="Annual Training Camps" class="activity-image">
+          <div class="activity-body">
+            <h3>Annual Training Camps</h3>
+            <p>Centralized military training camps where cadets sharpen tactical skills, drill precision, and build lasting bonds.</p>
+          </div>
+        </div>
+        <div class="activity-card scroll-reveal-up stagger-2">
+          <img src="images/Weapon Training & Drill.jpeg" alt="Weapon Training & Drill" class="activity-image">
+          <div class="activity-body">
+            <h3>Weapon Training & Drill</h3>
+            <p>Hands-on experience with small arms handling, target practice, and tactical fieldcraft under the strict supervision of military instructors.</p>
+          </div>
+        </div>
+        <div class="activity-card scroll-reveal-up stagger-3">
+          <img src="images/parade-salute.jpeg" alt="National Day Parades" class="activity-image">
+          <div class="activity-body">
+            <h3>National Day Parades</h3>
+            <p>Represent the Air Wing with pride during Independence Day and Victory Day ceremonial salutes.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section id="gallery" class="section">
+    <div class="container">
+      <div class="section-header scroll-reveal-up">
+        <h2>Platoon Gallery</h2>
+        <div class="underline"></div>
+        <p>Glimpses of parades, aeromodelling sessions, camps, and college events.</p>
+      </div>
+
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <img src="images/Annual Parade 2026.jpg" alt="Annual Parade 2026">
+          <span>Annual Parade 2026</span>
+        </div>
+        <div class="gallery-item">
+          <img src="images/Flight Practice.jpeg" alt="Flight Practice">
+          <span>Flight Practice</span>
+        </div>
+        <div class="gallery-item">
+          <img src="images/Weapon Training &amp; Drill.jpeg" alt="Weapon Training &amp; Drill">
+          <span>Weapon Training &amp; Drill</span>
+        </div>
+        <div class="gallery-item">
+          <img src="images/Promotion Exam &amp; Viva.jpeg" alt="Promotion Exam &amp; Viva">
+          <span>Promotion Exam &amp; Viva</span>
+        </div>
+        <div class="gallery-item">
+          <img src="images/Contingent Group Photo.jpg" alt="Contingent Group Photo">
+          <span>Contingent Group Photo</span>
+        </div>
+        <div class="gallery-item">
+          <img src="images/Community Service.jpg" alt="Community Service">
+          <span>Community Service</span>
+        </div>
+        <div class="gallery-item">
+          <img src="images/Annual Summer Training.jpg" alt="Annual Summer Training">
+          <span>Annual Summer Training</span>
+        </div>
+        <div class="gallery-item">
+          <img src="images/Independence Day Celebration.jpg" alt="Independence Day Celebration">
+          <span>Independence Day Celebration</span>
+        </div>
+        <div class="gallery-item">
+          <img src="images/Central Camp.jpeg" alt="Central Camp">
+          <span>Central Training Camp</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact / Join Section -->
+  <section id="contact" class="section bg-light">
+    <div class="container">
+      <div class="section-header scroll-reveal-up">
+        <h2>Join BMARPC Air Wing</h2>
+        <div class="underline"></div>
+        <p>Submit your cadet enrollment inquiry or get in touch with the platoon.</p>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-info-box">
+          <h3>Contact Information</h3>
+          <p><i class="fas fa-map-marker-alt"></i> <span><strong>Birshreshtha Munshi Abdur Rouf Public College</strong><br>Peelkhana, BGB Headquarters, Dhaka-1205, Bangladesh</span></p>
+          <p><i class="fas fa-envelope"></i> <span>info@abdurroufcollege.ac.bd</span></p>
+          <p><i class="fas fa-phone-alt"></i> <span>+880 1640-610887 &nbsp;|&nbsp; <strong>Abrar Ahnaf Rhyme</strong> [In-Charge]</span></p>
+          <p><i class="fas fa-globe"></i> <span>Official FB: facebook.com/bmarpcairwingcontingentofficial</span></p>
+          <div class="social-links-box">
+            <a href="https://www.facebook.com/bmarpcairwingcontingentofficial" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/bncc_air_wing_junior_bmarpc" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.bncc.info" target="_blank"><i class="fas fa-globe"></i></a>
+          </div>
+        </div>
+
+        <form id="enrollForm" name="cadet-inquiry" method="POST" data-netlify="true" class="enroll-form">
+          <h3>Cadet Enlistment Inquiry</h3>
+          <input type="hidden" name="form-name" value="cadet-inquiry">
+          <div class="form-group">
+            <input type="text" id="fullName" name="full-name" placeholder="Full Name" required>
+          </div>
+          <div class="form-group">
+            <input type="text" id="cadetClass" name="class-section" placeholder="Class, Section, College ID &amp; Section" required>
+          </div>
+          <div class="form-group">
+            <input type="email" id="email" name="email" placeholder="Email Address" required>
+          </div>
+          <div class="form-group">
+            <input type="text" id="phone" name="whatsapp" placeholder="WhatsApp Number" required>
+          </div>
+          <div class="form-group">
+            <textarea id="message" name="message" rows="4" placeholder="Why do you want to join BMARPC BNCC Air Wing?" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-full">Submit Application</button>
+          <p id="formResponse" class="form-response"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-flex">
+      <p>&copy; 2026 BMARPC BNCC Air Wing (12 No. Flight, 56 BNCC Squadron). All Rights Reserved.</p>
+      <p>বাংলার আকাশ রাখিব মুক্ত &bull; Touch the Sky with Honor</p>
+      <p>In-Charge: Abrar Ahnaf Rhyme</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

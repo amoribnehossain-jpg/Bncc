@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Legacy & History | BMARPC BNCC Air Wing</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+  <style>
+    /* History Page Specific Styles */
+    .history-banner {
+      position: relative;
+      min-height: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: url('images/hero-jets.jpeg') center center no-repeat;
+      background-size: cover;
+      overflow: hidden;
+    }
+
+    .history-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.75);
+    }
+
+    .history-banner-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .history-banner-content h1 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      color: var(--white);
+      margin-bottom: 0.75rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .history-banner-content p {
+      font-size: 1.05rem;
+      color: rgba(255, 255, 255, 0.8);
+      font-weight: 400;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Timeline Section */
+    .timeline-section {
+      padding: 5rem 0;
+      background: var(--bg);
+    }
+
+    .timeline-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      position: relative;
+    }
+
+    .timeline-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 4px;
+      background: var(--sky);
+      transform: translateX(-50%);
+      border-radius: 2px;
+    }
+
+    .timeline-item {
+      position: relative;
+      width: 100%;
+      padding: 2rem 0;
+      display: flex;
+      align-items: center;
+    }
+
+    .timeline-item:nth-child(odd) {
+      justify-content: flex-start;
+    }
+
+    .timeline-item:nth-child(even) {
+      justify-content: flex-end;
+    }
+
+    .timeline-item:nth-child(odd) .timeline-card {
+      margin-right: auto;
+      margin-left: 0;
+    }
+
+    .timeline-item:nth-child(even) .timeline-card {
+      margin-left: auto;
+      margin-right: 0;
+    }
+
+    .timeline-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      width: 45%;
+      max-width: 480px;
+      min-width: 320px;
+      position: relative;
+    }
+
+    .timeline-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .timeline-card::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 20px;
+      height: 20px;
+      background: var(--sky);
+      border: 4px solid var(--white);
+      border-radius: 50%;
+      transform: translateY(-50%);
+      z-index: 1;
+      box-shadow: 0 0 0 2px var(--sky);
+    }
+
+    .timeline-item:nth-child(odd) .timeline-card::before {
+      right: -60px;
+    }
+
+    .timeline-item:nth-child(even) .timeline-card::before {
+      left: -60px;
+    }
+
+    .timeline-year {
+      display: inline-block;
+      background: var(--sky);
+      color: var(--white);
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 0.35rem 0.9rem;
+      border-radius: 6px;
+      margin-bottom: 1rem;
+      letter-spacing: 0.5px;
+    }
+
+    .timeline-card h3 {
+      font-size: 1.05rem;
+      color: var(--heading);
+      font-weight: 600;
+      line-height: 1.5;
+      margin-bottom: 0;
+    }
+
+    @media (max-width: 768px) {
+      .history-banner {
+        min-height: 300px;
+      }
+
+      .timeline-container::before {
+        left: 20px;
+      }
+
+      .timeline-item {
+        justify-content: flex-start !important;
+        padding-left: 50px;
+      }
+
+      .timeline-item:nth-child(odd) .timeline-card,
+      .timeline-item:nth-child(even) .timeline-card {
+        margin: 0;
+        width: 100%;
+        max-width: none;
+      }
+
+      .timeline-item:nth-child(odd) .timeline-card::before,
+      .timeline-item:nth-child(even) .timeline-card::before {
+        left: -50px;
+        right: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="container top-bar-flex">
+      <div class="contact-info">
+        <span><i class="fas fa-envelope"></i> info@abdurroufcollege.ac.bd</span>
+        <span><i class="fas fa-phone"></i> +880 1640-610887</span>
+        <span><i class="fas fa-user-shield"></i> Abrar Ahnaf Rhyme [In-Charge]</span>
+        <span><i class="fas fa-plane"></i> 12 No. Flight | 56 BNCC Squadron (Dhaka Sqn)</span>
+      </div>
+      <div class="social-links">
+        <a href="https://www.facebook.com/bmarpcairwingcontingentofficial" target="_blank" title="Facebook Page"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/bncc_air_wing_junior_bmarpc" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.bncc.info" target="_blank" title="BNCC HQ"><i class="fas fa-globe"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header / Navigation -->
+  <header class="header">
+    <div class="container nav-container">
+      <a href="https://www.abdurroufcollege.ac.bd/" target="_blank" class="brand">
+        <div class="logo-placeholder"><img src="images/BMARPC.jpg" alt="BMARPC" style="width:100%;height:100%;object-fit:contain;"></div>
+        <div class="brand-text">
+          <h1>BMARPC AIR WING</h1>
+          <p>BNCC 12 No. Flight &bull; 56 Sqn Dhaka</p>
+        </div>
+      </a>
+      <nav class="nav-menu">
+        <a href="index.html#home">Home</a>
+        <a href="index.html#about">About</a>
+        <a href="index.html#structure">Command</a>
+        <a href="history.html" class="active">History</a>
+        <a href="index.html#activities">Activities</a>
+        <a href="notice.html">Notice</a>
+        <a href="index.html#ranks">Ranks</a>
+        <a href="index.html#gallery">Gallery</a>
+        <a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a>
+        <a href="index.html#contact" class="btn-nav">Join Platoon</a>
+      </nav>
+      <div class="hamburger">
+        <i class="fas fa-bars"></i>
+      </div>
+    </div>
+  </header>
+
+  <!-- History Hero Banner -->
+  <section class="history-banner">
+    <div class="history-banner-content">
+      <h1>Our Legacy & History</h1>
+      <p>The proud journey of the Bangladesh National Cadet Corps.</p>
+    </div>
+  </section>
+
+  <!-- Timeline Section -->
+  <section class="timeline-section">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <h2>Historical Timeline</h2>
+        <div class="underline"></div>
+        <p>Key milestones in the evolution of BNCC from its inception to present day.</p>
+      </div>
+    </div>
+
+    <div class="timeline-container">
+      <div class="timeline-item" data-aos="fade-right">
+        <div class="timeline-card">
+          <span class="timeline-year">1920</span>
+          <h3>The British Government formed the "University Corps" (UC) for university students.</h3>
+        </div>
+      </div>
+
+      <div class="timeline-item" data-aos="fade-left">
+        <div class="timeline-card">
+          <span class="timeline-year">1921</span>
+          <h3>UC was officially established at Dhaka University on July 1st.</h3>
+        </div>
+      </div>
+
+      <div class="timeline-item" data-aos="fade-right">
+        <div class="timeline-card">
+          <span class="timeline-year">1923</span>
+          <h3>Renamed "University Training Corps" (UTC) under the Indian Territorial Force Act and formally launched.</h3>
+        </div>
+      </div>
+
+      <div class="timeline-item" data-aos="fade-left">
+        <div class="timeline-card">
+          <span class="timeline-year">1927</span>
+          <h3>Captain E. Groom initiated the first formal training for 16 officers and 100 cadets at Dhaka University.</h3>
+        </div>
+      </div>
+
+      <div class="timeline-item" data-aos="fade-right">
+        <div class="timeline-card">
+          <span class="timeline-year">1928</span>
+          <h3>UTC was formally inaugurated with 12 units. The Dhaka University unit was named "12 Dhaka Unit".</h3>
+        </div>
+      </div>
+
+      <div class="timeline-item" data-aos="fade-left">
+        <div class="timeline-card">
+          <span class="timeline-year">1942</span>
+          <h3>Expanded into a full company.</h3>
+        </div>
+      </div>
+
+      <div class="timeline-item" data-aos="fade-right">
+        <div class="timeline-card">
+          <span class="timeline-year">1943</span>
+          <h3>Renamed "University Officers Training Corps" (UOTC).</h3>
+        </div>
+      </div>
+
+      <div class="timeline-item" data-aos="fade-left">
+        <div class="timeline-card">
+          <span class="timeline-year">1946</span>
+          <h3>The first annual training camp was held in Sylhet.</h3>
+        </div>
+      </div>
+
+      <div class="timeline-item" data-aos="fade-right">
+        <div class="timeline-card">
+          <span class="timeline-year">1950</span>
+          <h3>Upgraded to a battalion with 625 cadets and 40 officers.</h3>
+        </div>
+      </div>
+
+      <div class="timeline-item" data-aos="fade-left">
+        <div class="timeline-card">
+          <span class="timeline-year">1953</span>
+          <h3>The Pakistan Government banned the UTC curriculum.</h3>
+        </div>
+      </div>
+
+      <div class="timeline-item" data-aos="fade-right">
+        <div class="timeline-card">
+          <span class="timeline-year">1966</span>
+          <h3>The curriculum was restarted and renamed "Pakistan Cadet Corps" (PCC).</h3>
+        </div>
+      </div>
+
+      <div class="timeline-item" data-aos="fade-left">
+        <div class="timeline-card">
+          <span class="timeline-year">1971</span>
+          <h3>Cadets played a crucial role in the Liberation War; 22 cadets were martyred.</h3>
+        </div>
+      </div>
+
+      <div class="timeline-item" data-aos="fade-right">
+        <div class="timeline-card">
+          <span class="timeline-year">1976</span>
+          <h3>Four independent platoons were established at Jahangirnagar, Chittagong, and Rajshahi Universities.</h3>
+        </div>
+      </div>
+
+      <div class="timeline-item" data-aos="fade-left">
+        <div class="timeline-card">
+          <span class="timeline-year">1979</span>
+          <h3>Then-President Ziaur Rahman merged the cadet corps to establish the Bangladesh National Cadet Corps (BNCC) through a government order.</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-flex">
+      <p>&copy; 2026 BMARPC BNCC Air Wing (12 No. Flight, 56 BNCC Squadron). All Rights Reserved.</p>
+      <p>বাংলার আকাশ রাখিব মুক্ত &bull; Touch the Sky with Honor</p>
+      <p>In-Charge: Abrar Ahnaf Rhyme</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 800,
+      easing: 'ease-out-cubic',
+      once: true,
+      offset: 100
+    });
+  </script>
+</body>
+</html>

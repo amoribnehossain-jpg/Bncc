@@ -8,83 +8,128 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #0a2540;
-      --accent: #d4af37;
-      --accent-hover: #c19b2e;
-      --bg: #f4f6f9;
+      --primary: #2c3e50;
+      --primary-light: #34495e;
+      --primary-dark: #1a2530;
+      --accent: #3498db;
+      --accent-hover: #2980b9;
+      --accent-dark: #16a085;
+      --bg: #f8f9fa;
+      --bg-light: #e9ecef;
       --white: #ffffff;
       --text: #2c3e50;
-      --text-muted: #627d98;
-      --border: #e2e8f0;
-      --radius: 8px;
+      --text-muted: #6c757d;
+      --border: #dee2e6;
+      --radius: 12px;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: 'Open Sans', sans-serif;
       min-height: 100vh;
-      background: url('images/background.jpeg') center/cover no-repeat fixed;
+      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.3)),
+                  url('images/hero-jets.jpeg') center center no-repeat;
+      background-size: cover;
+      background-attachment: fixed;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 2rem;
+      padding: 1.5rem;
+      position: relative;
+      overflow: hidden;
     }
     .login-page {
       background: var(--white);
       border-radius: var(--radius);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+      box-shadow: 0 25px 60px rgba(0,0,0,0.15);
       overflow: hidden;
       max-width: 900px;
       width: 100%;
       display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .login-page.scroll-reveal {
+      transform: translateY(25px);
+      opacity: 0;
     }
     .login-image {
       flex: 1;
-      background: linear-gradient(135deg, rgba(10,37,64,0.6), rgba(24,59,86,0.7)),
-                  url('images/background.jpeg') center/cover no-repeat;
+      background: url('images/hero-jets.jpeg') center center no-repeat;
+      background-size: cover;
       min-height: 400px;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--white);
       text-align: center;
       padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .login-image::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(135deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.2) 100%);
     }
     .logo-container {
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 1.5rem;
+      position: relative;
+      z-index: 2;
     }
     .logo-container img {
-      width: 120px;
-      height: 120px;
+      width: 140px;
+      height: 140px;
       object-fit: contain;
       cursor: pointer;
-      filter: drop-shadow(0 4px 15px rgba(0,0,0,0.3));
+      filter: drop-shadow(0 4px 20px rgba(0,0,0,0.15));
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 3px solid rgba(255, 255, 255, 0.4);
+      border-radius: 50%;
+      background: var(--white);
+      padding: 0.5rem;
     }
     .logo-container img:hover {
       transform: scale(1.05);
-      filter: drop-shadow(0 6px 20px rgba(0,0,0,0.4));
+      filter: drop-shadow(0 6px 25px rgba(0,0,0,0.2));
+      box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.6);
     }
     .logo-container h2 {
       font-family: 'Montserrat', sans-serif;
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
-      font-weight:800;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
       margin: 0;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+      letter-spacing: 0.5px;
+      color: var(--white);
+      text-shadow: 0 2px 8px rgba(0,0,0,0.3);
     }
     .logo-container p {
       font-family: 'Montserrat', sans-serif;
-      font-size: clamp(0.9rem, 2.5vw, 1.15rem);
+      font-size: clamp(0.9rem, 2.5vw, 1.2rem);
       opacity: 0.95;
-      max-width: 350px;
+      max-width: 400px;
       margin: 0 auto;
-      text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+      line-height: 1.6;
+      color: var(--white);
+      text-shadow: 0 1px 4px rgba(0,0,0,0.2);
+    }
+    .badge {
+      background: var(--accent);
+      color: var(--white);
+      padding: 0.5rem 1.25rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: 0 2px 10px rgba(52, 152, 219, 0.3);
     }
     .login-form-container {
       flex: 1;
-      padding: 3rem;
+      padding: 3.5rem;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -96,82 +141,208 @@
     }
     .login-header h1 {
       font-family: 'Montserrat', sans-serif;
-      font-size: 2rem;
+      font-size: 2.2rem;
       color: var(--primary);
-      font-weight: 800;
-      margin-bottom: 0.5rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 0.5rem;
+      gap: 0.75rem;
     }
-    .login-header p { color: var(--text-muted); font-size: 1.05rem; }
-    .form-group { margin-bottom: 1.5rem; }
+    .login-header p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+    }
+    .form-group {
+      margin-bottom: 1.75rem;
+    }
     .form-group label {
       display: block;
-      margin-bottom: 0.5rem;
-      color: var(--primary);
+      margin-bottom: 0.75rem;
+      color: var(--text);
       font-weight: 600;
       font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
     .form-group input {
       width: 100%;
-      padding: 1rem 1.25rem;
+      padding: 1.25rem 1.5rem;
       border: 2px solid var(--border);
       border-radius: var(--radius);
       font-size: 1rem;
-      transition: var(--transition);
+      transition: all 0.3s ease;
       outline: none;
       background: var(--white);
+      color: var(--text);
     }
     .form-group input:focus {
       border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.25);
+      box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.25);
+      transform: translateY(-2px);
+    }
+    .form-group input::placeholder {
+      color: var(--text-muted);
     }
     .btn {
       display: block;
       width: 100%;
-      padding: 1rem;
+      padding: 1.1rem;
       border-radius: var(--radius);
       font-weight: 600;
-      font-size: 1rem;
+      font-size: 1.05rem;
       cursor: pointer;
-      transition: var(--transition);
+      transition: all 0.3s ease;
       border: none;
-      color: var(--primary);
+      color: var(--white);
     }
     .btn-primary {
-      background: var(--accent);
+      background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+      box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
     }
-    .btn-primary:hover { background: var(--accent-hover); transform: translateY(-2px); }
-    .response { text-align: center; margin-top: 1rem; font-weight: 600; }
-    .response.error { color: #ff6b6b; }
-    .response.success { color: #2e7d32; }
+    .btn-primary:hover {
+      background: linear-gradient(135deg, var(--accent-hover), var(--accent));
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(52, 152, 219, 0.5);
+    }
+    .btn-primary:active {
+      transform: translateY(0);
+    }
+    .response {
+      text-align: center;
+      margin-top: 1.5rem;
+      font-weight: 600;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius);
+      animation: fadeInUp 0.5s ease;
+      border: 1px solid;
+    }
+    .response.error {
+      background: #f8d7da;
+      color: #721c24;
+      border-color: #f5c6cb;
+    }
+    .response.success {
+      background: #d4edda;
+      color: #155724;
+      border-color: #c3e6cb;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
     @media (max-width: 768px) {
-      .login-page { flex-direction: column; }
-      .login-image { min-height: 300px; }
-      .login-form-container { padding: 2rem; }
+      .login-page {
+        flex-direction: column;
+        max-width: 540px;
+      }
+      .login-image {
+        min-height: 280px;
+        padding: 1.5rem;
+      }
+      .logo-container {
+        gap: 1rem;
+      }
+      .logo-container img {
+        width: 110px;
+        height: 110px;
+      }
+      .login-form-container {
+        padding: 2rem;
+      }
+      .login-header h1 {
+        font-size: 1.8rem;
+      }
+      .login-header p {
+        font-size: 1rem;
+      }
+      .form-group input {
+        padding: 1.1rem 1.3rem;
+      }
+      .btn {
+        padding: 1rem;
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .login-page {
+        max-width: 480px;
+        padding: 1rem;
+        border-radius: 12px;
+      }
+      body {
+        padding: 0;
+      }
+      .login-form-container {
+        padding: 1.5rem;
+      }
+      .logo-container {
+        gap: 0.75rem;
+      }
+      .logo-container img {
+        width: 100px;
+        height: 100px;
+      }
+      .logo-container h2 {
+        font-size: 1.5rem;
+      }
+      .logo-container p {
+        font-size: 0.9rem;
+        max-width: 220px;
+      }
+      .badge {
+        padding: 0.4rem 1rem;
+        font-size: 0.78rem;
+      }
+      .header-h1 {
+        font-size: 1.6rem;
+      }
+      .btn {
+        padding: 0.95rem;
+        font-size: 0.98rem;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .login-page {
+        max-width: 340px;
+        border-radius: 10px;
+      }
+      .login-form-container {
+        padding: 1.25rem;
+      }
+      .form-group input {
+        padding: 1rem 1.2rem;
+      }
+      .btn {
+        padding: 0.9rem;
+        font-size: 0.95rem;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="login-page">
+  <div class="login-page scroll-reveal">
     <div class="login-image">
       <div class="logo-container">
-        <img src="images/Bncc Logo.jpg" alt="BNCC Logo">
+        <img src="images/bncc-logo.jpg" alt="BNCC Logo" id="logoImg">
         <h2>BMARPC BNCC Air Wing</h2>
         <p>Soaring Higher, Reaching New Heights – Train, Lead, Soar!</p>
+        <span class="badge">Cadet Portal</span>
       </div>
     </div>
     <div class="login-form-container">
       <div class="login-header">
-        <h1><i class="fas fa-plane"></i> Cadet Portal</h1>
+        <h1><i class="fas fa-crown"></i> Cadet Portal</h1>
         <p>Access your profile and training details</p>
       </div>
       <form id="loginForm">
         <div class="form-group">
-          <label for="name"><i class="fas fa-user"></i> Full Name</label>
-          <input type="text" id="name" placeholder="Enter your name" required>
+          <label for="name"><i class="fas fa-user-check"></i> Full Name</label>
+          <input type="text" id="name" placeholder="Enter your full name" required>
         </div>
         <div class="form-group">
           <label for="cadetNo"><i class="fas fa-id-badge"></i> Cadet No.</label>
@@ -179,9 +350,9 @@
         </div>
         <div class="form-group">
           <label for="password"><i class="fas fa-lock"></i> Password</label>
-          <input type="password" id="password" placeholder="Enter password" required>
+          <input type="password" id="password" placeholder="Enter your password" required>
         </div>
-        <button type="submit" class="btn btn-primary">Login</button>
+        <button type="submit" class="btn btn-primary">Login to Dashboard</button>
         <p id="response" class="response"></p>
       </form>
     </div>
@@ -189,15 +360,32 @@
   <script>
     const loginForm = document.getElementById('loginForm');
     const response = document.getElementById('response');
+    const logoImg = document.getElementById('logoImg');
     const API_URL = 'https://bncc-2.onrender.com';
+
+    function toggleScrollReveal() {
+      document.querySelector('.login-page').classList.remove('scroll-reveal');
+    }
+
+    setTimeout(toggleScrollReveal, 500);
+
+    logoImg.addEventListener('mouseenter', function() {
+      this.style.transform = 'scale(1.08) rotate(3deg)';
+    });
+    logoImg.addEventListener('mouseleave', function() {
+      this.style.transform = 'scale(1)';
+    });
+
     loginForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const btn = loginForm.querySelector('button');
-      btn.textContent = 'Logging in...';
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Authenticating...';
       btn.disabled = true;
+
       const name = document.getElementById('name').value;
       const cadetNo = document.getElementById('cadetNo').value;
       const password = document.getElementById('password').value;
+
       try {
         const res = await fetch(API_URL + '/login', {
           method: 'POST',
@@ -205,34 +393,40 @@
           body: JSON.stringify({ name, cadetNo, password })
         });
         const data = await res.json();
+
         if (res.ok) {
           localStorage.setItem('bmarpc_cadet_token', JSON.stringify({ token: data.token, cadet: data.cadet }));
-          response.innerHTML = '<span class="response success">Login successful! Redirecting...</span>';
+          response.innerHTML = '<i class="fas fa-check-circle"></i> Login successful! Redirecting...';
+          response.className = 'response success';
           setTimeout(() => window.location.href = 'profile.html', 1500);
         } else {
-          response.innerHTML = '<span class="response error">' + data.error + '</span>';
+          response.innerHTML = '<i class="fas fa-exclamation-circle"></i> ' + data.error;
+          response.className = 'response error';
         }
       } catch (err) {
-        response.innerHTML = '<span class="response error">Server unavailable. Using demo mode.</span>';
+        response.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Server unavailable. Using demo mode.';
+        response.className = 'response error';
+
         const demoCadets = {
           '25561220': { name: 'Amor Ibne Hossain', cadetNo: '25561220', rollSec: '3279 H', batch: '2027', rank: 'Cadet Lance Corporal', shift: 'BV', nationality: 'Bangladeshi', sex: 'Male' },
           '002': { name: 'Jane Smith', cadetNo: '002', rollSec: '11B', batch: '01', rank: 'SGT', shift: 'BV', nationality: 'Bangladeshi', sex: 'Female' },
           '001': { name: 'John Doe', cadetNo: '001', rollSec: '12A', batch: '02', rank: 'CUO', shift: 'EV', nationality: 'Bangladeshi', sex: 'Male' }
         };
-        const cadet = demoCadets[cadetNo] || { 
-          name, 
-          cadetNo, 
-          rollSec: '12A', 
-          batch: '02', 
-          rank: 'Cadet', 
-          shift: 'EV', 
-          nationality: 'Bangladeshi', 
-          sex: 'Male' 
+        const cadet = demoCadets[cadetNo] || {
+          name,
+          cadetNo,
+          rollSec: '12A',
+          batch: '02',
+          rank: 'Cadet',
+          shift: 'EV',
+          nationality: 'Bangladeshi',
+          sex: 'Male'
         };
         localStorage.setItem('bmarpc_cadet_token', JSON.stringify({ token: 'demo', cadet }));
         setTimeout(() => window.location.href = 'profile.html', 1500);
       }
-      btn.textContent = 'Login';
+
+      btn.innerHTML = '<i class="fas fa-arrow-right"></i> Login to Dashboard';
       btn.disabled = false;
     });
   </script>

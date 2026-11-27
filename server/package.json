@@ -3,14 +3,16 @@
   "version": "1.0.0",
   "main": "server.js",
   "dependencies": {
+    "@supabase/supabase-js": "^2.39.0",
     "bcrypt": "^6.0.0",
     "cors": "^2.8.6",
     "dotenv": "^18.0.10",
     "express": "^4.22.3",
-    "firebase-admin": "^12.7.0"
+    "multer": "^1.4.6-lts.1"
   },
   "description": "",
   "scripts": {
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
