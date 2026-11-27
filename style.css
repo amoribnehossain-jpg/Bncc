@@ -1058,6 +1058,34 @@ img:not(.hero-logo):not(.logo-placeholder img) {
 }
 
 @media (max-width: 768px) {
+  .top-bar {
+    font-size: 0.75rem;
+  }
+  .contact-info {
+    gap: 0.9rem;
+  }
+  .contact-info span:nth-child(1),
+  .contact-info span:nth-child(3),
+  .contact-info span:nth-child(4) {
+    display: none;
+  }
+  .social-links {
+    gap: 0.45rem;
+  }
+  .social-links a {
+    width: 26px;
+    height: 26px;
+    font-size: 0.75rem;
+  }
+  .brand {
+    gap: 0.5rem;
+  }
+  .brand-text h1 {
+    font-size: 0.95rem;
+  }
+  .brand-text p {
+    font-size: 0.62rem;
+  }
   .grid-3 {
     grid-template-columns: 1fr;
   }
