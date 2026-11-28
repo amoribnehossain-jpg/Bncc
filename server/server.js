@@ -151,6 +151,8 @@ app.post('/login', async (req, res) => {
     token,
     cadet: {
       ...safe,
+      cadetNo: safe.cadet_no,
+      rollSec: safe.roll_sec,
       is_admin: Boolean(cadet.is_admin),
       attendance: safe.attendance || [],
       lastUpdated: safe.last_updated || safe.created_at
