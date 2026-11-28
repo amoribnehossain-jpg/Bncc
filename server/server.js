@@ -5,6 +5,7 @@ const cors = require('cors');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
+const jwt = require('jsonwebtoken');
 const { createClient } = require('@supabase/supabase-js');
 
 const app = express();
@@ -13,6 +14,7 @@ app.use(express.json());
 
 const BCRYPT_SALT_ROUNDS = 10;
 const DEFAULT_PASSWORD = 'password';
+const JWT_SECRET = process.env.JWT_SECRET || 'bmarpc-dev-secret-change-in-production';
 
 const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseKey = process.env.SUPABASE_SECRET_KEY;
@@ -64,9 +66,9 @@ async function seedDefaultUsers() {
   const defaultHash = await bcrypt.hash(DEFAULT_PASSWORD, BCRYPT_SALT_ROUNDS);
 
   const seedUsers = [
-    { name: 'John Doe', cadet_no: '001', password_hash: defaultHash, roll_sec: '12A', batch: '02', rank: 'CUO', shift: 'EV', nationality: 'Bangladeshi', sex: 'Male' },
-    { name: 'Jane Smith', cadet_no: '002', password_hash: defaultHash, roll_sec: '11B', batch: '01', rank: 'SGT', shift: 'BV', nationality: 'Bangladeshi', sex: 'Female' },
-    { name: 'Amor Ibne Hossain', cadet_no: '25561220', password_hash: defaultHash, roll_sec: '3279 H', batch: '2027', rank: 'Cadet Lance Corporal', shift: 'BV', nationality: 'Bangladeshi', sex: 'Male' },
+    { name: 'John Doe', cadet_no: '001', password_hash: defaultHash, roll_sec: '12A', batch: '02', rank: 'CUO', shift: 'EV', nationality: 'Bangladeshi', sex: 'Male', is_admin: false },
+    { name: 'Jane Smith', cadet_no: '002', password_hash: defaultHash, roll_sec: '11B', batch: '01', rank: 'SGT', shift: 'BV', nationality: 'Bangladeshi', sex: 'Female', is_admin: false },
+    { name: 'Amor Ibne Hossain', cadet_no: '25561220', password_hash: defaultHash, roll_sec: '3279 H', batch: '2027', rank: 'Cadet Lance Corporal', shift: 'BV', nationality: 'Bangladeshi', sex: 'Male', is_admin: true },
   ];
 
   const { error } = await supabase.from('cadets').insert(seedUsers);
@@ -80,7 +82,32 @@ app.get('/health', (req, res) => res.json({ status: 'ok' }));
 // Serve uploaded files
 app.use('/uploads', express.static(uploadDir));
 
-// ---------- Auth ----------
+// ---------- Auth / RBAC ----------
+
+// Reads the JWT from the Authorization header, verifies it, and attaches the
+// decoded payload to req. Sets req.user = null when the token is absent/invalid.
+function attachUser(req, res, next) {
+  req.user = null;
+  const header = req.headers.authorization || '';
+  if (!header.startsWith('Bearer ')) return next();
+  try {
+    req.user = jwt.verify(header.slice(7), JWT_SECRET);
+  } catch (e) {
+    req.user = null;
+  }
+  next();
+}
+
+// Guards admin-only routes: a valid JWT whose is_admin flag is true.
+function verifyAdmin(req, res, next) {
+  if (!req.user || !req.user.is_admin) {
+    return res.status(403).json({ error: 'Admin access required' });
+  }
+  next();
+}
+
+// Attach the decoded JWT (if any) to every request.
+app.use(attachUser);
 
 app.post('/login', async (req, res) => {
   const { name, cadetNo, password } = req.body;
@@ -107,11 +134,24 @@ app.post('/login', async (req, res) => {
   if (!isValid) return res.status(401).json({ error: 'Invalid password' });
 
   const { password_hash, ...safe } = cadet;
+
+  const token = jwt.sign(
+    {
+      id: cadet.id,
+      cadetNo: cadet.cadet_no,
+      name: cadet.name,
+      is_admin: Boolean(cadet.is_admin),
+    },
+    JWT_SECRET,
+    { expiresIn: '12h' }
+  );
+
   res.json({
     message: 'Login successful',
-    token: Buffer.from(cadet.cadet_no).toString('base64'),
+    token,
     cadet: {
       ...safe,
+      is_admin: Boolean(cadet.is_admin),
       attendance: safe.attendance || [],
       lastUpdated: safe.last_updated || safe.created_at
     }
@@ -120,7 +160,7 @@ app.post('/login', async (req, res) => {
 
 // ---------- Register ----------
 
-app.post('/register', upload.single('photo'), async (req, res) => {
+app.post('/register', verifyAdmin, upload.single('photo'), async (req, res) => {
   const { name, cadetNo, password, rollSec, batch, rank, shift, nationality, sex } = req.body;
 
   if (!name || !cadetNo || !password) {
@@ -185,7 +225,7 @@ app.get('/notices', async (req, res) => {
   res.json({ notices: mapped });
 });
 
-app.post('/notices', upload.single('image'), async (req, res) => {
+app.post('/notices', verifyAdmin, upload.single('image'), async (req, res) => {
   const { title, content, type } = req.body;
   if (!title || !content) {
     return res.status(400).json({ error: 'Title and content are required' });
@@ -218,7 +258,7 @@ app.post('/notices', upload.single('image'), async (req, res) => {
   });
 });
 
-app.delete('/notices/:id', async (req, res) => {
+app.delete('/notices/:id', verifyAdmin, async (req, res) => {
   const { data: deleted, error } = await supabase
     .from('notices')
     .delete({ eq: 'id', value: req.params.id })
@@ -269,7 +309,7 @@ app.get('/students/:cadetNo', async (req, res) => {
   });
 });
 
-app.put('/students/:cadetNo', upload.single('photo'), async (req, res) => {
+app.put('/students/:cadetNo', verifyAdmin, upload.single('photo'), async (req, res) => {
   const { name, rollSec, batch, rank, shift, nationality, sex } = req.body;
 
   const updatePayload = {};
@@ -304,6 +344,127 @@ app.put('/students/:cadetNo', upload.single('photo'), async (req, res) => {
       lastUpdated: safe.last_updated,
     },
   });
+});
+
+// Alias routes matching spec: /api/cadets
+const apiCadetsHandler = async (req, res) => {
+  const cadetNo = req.params.cadet_no;
+  const { data, error } = await supabase.from('cadets').select('*').eq('cadet_no', cadetNo).limit(1);
+  if (error) return res.status(500).json({ error: error.message });
+  if (!data || data.length === 0) return res.status(404).json({ error: 'Cadet not found' });
+  const { password_hash, ...safe } = data[0];
+  res.json({
+    cadet: {
+      ...safe,
+      cadetNo: safe.cadet_no,
+      rollSec: safe.roll_sec,
+      photoUrl: safe.photo_url,
+      lastUpdated: safe.last_updated,
+    },
+  });
+};
+
+app.get('/api/cadets', async (req, res) => {
+  const { data, error } = await supabase.from('cadets').select('*');
+  if (error) return res.status(500).json({ error: error.message });
+  const students = (data || []).map(({ password_hash, ...safe }) => ({
+    ...safe,
+    cadetNo: safe.cadet_no,
+    rollSec: safe.roll_sec,
+    photoUrl: safe.photo_url,
+    lastUpdated: safe.last_updated,
+  }));
+  res.json({ students });
+});
+
+app.get('/api/cadets/:cadet_no', apiCadetsHandler);
+
+app.put('/api/cadets/:cadet_no', verifyAdmin, upload.single('photo'), async (req, res) => {
+  const { name, rollSec, batch, rank, shift, nationality, sex } = req.body;
+  const updatePayload = {};
+  if (name) updatePayload.name = name;
+  if (rollSec) updatePayload.roll_sec = rollSec;
+  if (batch) updatePayload.batch = batch;
+  if (rank) updatePayload.rank = rank;
+  if (shift) updatePayload.shift = shift;
+  if (nationality) updatePayload.nationality = nationality;
+  if (sex) updatePayload.sex = sex;
+  if (req.file) updatePayload.photo_url = `/uploads/${req.file.filename}`;
+  updatePayload.last_updated = new Date().toISOString();
+
+  const { data, error } = await supabase
+    .from('cadets')
+    .update(updatePayload)
+    .eq('cadet_no', req.params.cadet_no)
+    .select();
+
+  if (error) return res.status(500).json({ error: error.message });
+  if (data.length === 0) return res.status(404).json({ error: 'Cadet not found' });
+  const { password_hash, ...safe } = data[0];
+  res.json({ message: 'Cadet updated successfully', cadet: { ...safe, cadetNo: safe.cadet_no, rollSec: safe.roll_sec, photoUrl: safe.photo_url, lastUpdated: safe.last_updated } });
+});
+
+app.delete('/api/cadets/:cadet_no', verifyAdmin, async (req, res) => {
+  const { data: deleted, error } = await supabase
+    .from('cadets')
+    .delete({ eq: 'cadet_no', value: req.params.cadet_no })
+    .select();
+  if (error) return res.status(500).json({ error: error.message });
+  if (!deleted || deleted.length === 0) return res.status(404).json({ error: 'Cadet not found' });
+  res.json({ message: 'Cadet deleted successfully' });
+});
+
+// Toggle a cadet's admin flag. Only admins may promote/demote.
+// Pass { is_admin: true/false }, or omit to toggle the current value.
+async function toggleAdminStatus(cadetNo, req, res) {
+  const { data: rows, error } = await supabase
+    .from('cadets')
+    .select('is_admin')
+    .eq('cadet_no', cadetNo)
+    .limit(1);
+
+  if (error) return res.status(500).json({ error: error.message });
+  if (!rows || rows.length === 0) return res.status(404).json({ error: 'Cadet not found' });
+
+  const current = Boolean(rows[0].is_admin);
+  const target = typeof req.body.is_admin === 'boolean' ? req.body.is_admin : !current;
+
+  const { data, error: updErr } = await supabase
+    .from('cadets')
+    .update({ is_admin: target, last_updated: new Date().toISOString() })
+    .eq('cadet_no', cadetNo)
+    .select()
+    .limit(1);
+
+  if (updErr) return res.status(500).json({ error: updErr.message });
+  if (!data || data.length === 0) return res.status(404).json({ error: 'Cadet not found' });
+
+  const { password_hash, ...safe } = data[0];
+  res.json({
+    message: target ? 'Cadet promoted to admin' : 'Cadet demoted from admin',
+    cadet: { ...safe, cadetNo: safe.cadet_no, is_admin: target },
+  });
+}
+
+app.put('/students/:cadetNo/promote', verifyAdmin, (req, res) => {
+  toggleAdminStatus(req.params.cadetNo, req, res);
+});
+
+// Alias route matching spec: /api/cadets/:cadet_no/promote
+app.put('/api/cadets/:cadet_no/promote', verifyAdmin, (req, res) => {
+  toggleAdminStatus(req.params.cadet_no, req, res);
+});
+
+app.delete('/students/:cadetNo', verifyAdmin, async (req, res) => {
+  const { data: deleted, error } = await supabase
+    .from('cadets')
+    .delete({ eq: 'cadet_no', value: req.params.cadetNo })
+    .select();
+
+  if (error) return res.status(500).json({ error: error.message });
+  if (!deleted || deleted.length === 0) return res.status(404).json({ error: 'Cadet not found' });
+
+  res.json({ message: 'Cadet deleted successfully' });
 });
 
 // ---------- Boot ----------

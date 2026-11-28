@@ -299,6 +299,27 @@
         flex: 1 1 100px;
       }
     }
+    .btn {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+      color: var(--white);
+      box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
+    }
+    .btn-primary:hover {
+      background: linear-gradient(135deg, var(--accent-hover), var(--accent));
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
+    }
   </style>
 </head>
 <body>
@@ -310,6 +331,23 @@
     <div class="profile-card">
       <div class="rank-badge" id="profileBadge">
         <i class="fas fa-star"></i> Cadet
+      </div>
+      <div id="admin-controls" style="display: none; padding: 1.25rem 2.5rem; background: var(--bg-light); border-bottom: 1px solid var(--border);">
+        <p style="margin: 0 0 0.75rem; font-weight: 600; color: var(--primary); display: flex; align-items: center; gap: 0.5rem;">
+          <i class="fas fa-user-shield" style="color: var(--accent);"></i> Admin Account
+        </p>
+        <button onclick="toggleAdminControls()" class="btn btn-primary" style="margin: 0 0 0.75rem 0; display: inline-block;"><i class="fas fa-cog"></i> Manage Cadets</button>
+        <a href="admin.html" class="logout-btn" style="margin: 0; display: inline-block;"><i class="fas fa-gavel"></i> Admin Panel</a>
+      </div>
+
+      <!-- Cadet Management Section (hidden by default) -->
+      <div id="cadet-management" style="display: none; padding: 1.5rem 2.5rem; background: var(--bg); border-top: 1px solid var(--border);">
+        <h3 style="margin: 0 0 1rem; color: var(--primary); font-family: 'Montserrat', sans-serif;">Manage Cadets</h3>
+        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+          <input type="text" id="searchCadetsProfile" placeholder="Search cadets..." style="padding: 0.5rem; border: 1px solid var(--border); border-radius: 8px; flex: 1;">
+          <button onclick="loadCadets()" class="btn btn-primary" style="padding: 0.5rem 1rem;"><i class="fas fa-refresh"></i></button>
+        </div>
+        <div id="cadetsList" style="max-height: 300px; overflow-y: auto;"></div>
       </div>
       <div class="profile-photo-section" id="profilePhotoSection">
         <img id="profilePhoto" src="" alt="Profile Photo">
@@ -383,15 +421,96 @@
     <button onclick="logout()" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
   </div>
   <script>
+    const API_URL = 'https://bncc.onrender.com';
+
     function logout() {
       localStorage.removeItem('bmarpc_cadet_token');
+      localStorage.removeItem('bmarpc_cadet_jwt');
       window.location.href = 'login.html';
     }
+
     function updateTime() {
       const now = new Date();
       document.getElementById('last-sync').textContent = 'Last sync: ' + now.toLocaleTimeString();
     }
     setInterval(updateTime, 1000);
+
+    function getAdminToken() {
+      const raw = localStorage.getItem('bmarpc_cadet_jwt') || localStorage.getItem('bmarpc_cadet_token');
+      if (!raw) return null;
+      try {
+        const parsed = JSON.parse(raw);
+        return parsed.token || parsed;
+      } catch (e) {
+        return raw;
+      }
+    }
+
+    function authHeaders(extra) {
+      const t = getAdminToken();
+      const h = Object.assign({}, extra || {});
+      if (t && t !== 'demo') h['Authorization'] = 'Bearer ' + t;
+      return h;
+    }
+
+    function toggleAdminControls() {
+      const section = document.getElementById('cadet-management');
+      section.style.display = section.style.display === 'none' ? 'block' : 'none';
+    }
+
+    async function loadCadets(searchTerm = '') {
+      const container = document.getElementById('cadetsList');
+      try {
+        const res = await fetch(API_URL + '/students', { headers: authHeaders() });
+        const data = await res.json();
+
+        if (data.students && data.students.length > 0) {
+          let cadets = data.students;
+          if (searchTerm) {
+            cadets = cadets.filter(c =>
+              c.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+              c.cadetNo.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+          }
+          container.innerHTML = cadets.map(function(cadet) {
+            const adminTag = cadet.is_admin
+              ? '<span style="background: rgba(212, 175, 55, 0.15); color: #d4af37; padding: 0.25rem 0.5rem; border-radius: 8px; font-size: 0.75rem; margin-left: 0.5rem;">Admin</span>'
+              : '';
+            const adminBtn = cadet.is_admin
+              ? '<button onclick="toggleAdmin(\'' + cadet.cadetNo + '\')" style="background: #dc3545; color: white; padding: 0.25rem 0.5rem; border: none; border-radius: 6px; cursor: pointer; font-size: 0.75rem;">Remove Admin</button>'
+              : '<button onclick="toggleAdmin(\'' + cadet.cadetNo + '\')" style="background: var(--accent); color: #0a2540; padding: 0.25rem 0.5rem; border: none; border-radius: 6px; cursor: pointer; font-size: 0.75rem; font-weight: 600;">Make Admin</button>';
+            return '<div style="display: flex; justify-content: space-between; align-items: center; padding: 0.75rem; border-bottom: 1px solid var(--border);">' +
+              '<div><strong>' + cadet.name + '</strong><div style="color: var(--text-muted); font-size: 0.8rem;">' + cadet.cadetNo + ' | ' + cadet.rank + '</div></div>' +
+              '<div>' + adminBtn + '</div>' +
+              '</div>';
+          }).join('');
+        } else {
+          container.innerHTML = '<p style="color: var(--text-muted);">No cadets found.</p>';
+        }
+      } catch (e) {
+        container.innerHTML = '<p style="color: #dc3545;">Error loading cadets.</p>';
+      }
+    }
+
+    async function toggleAdmin(cadetNo) {
+      if (!confirm('Are you sure you want to change this cadet\'s admin status?')) return;
+      try {
+        const res = await fetch(API_URL + '/api/cadets/' + cadetNo + '/promote', {
+          method: 'PUT',
+          headers: authHeaders({ 'Content-Type': 'application/json' }),
+          body: JSON.stringify({})
+        });
+        const result = await res.json();
+        if (res.ok) {
+          loadCadets(document.getElementById('searchCadetsProfile').value);
+        } else {
+          alert(result.error || 'Error updating admin status');
+        }
+      } catch (e) {
+        alert('Server error');
+      }
+    }
+
     const saved = localStorage.getItem('bmarpc_cadet_token');
     if (saved) {
       const cadet = JSON.parse(saved).cadet;
@@ -405,6 +524,10 @@
       document.getElementById('profileSex').textContent = cadet.sex;
       document.getElementById('profileRank').textContent = cadet.rank;
       document.getElementById('lastUpdated').innerHTML = '<p>Last updated: ' + new Date().toLocaleString() + '</p>';
+      if (cadet.is_admin) {
+        document.getElementById('admin-controls').style.display = 'block';
+        loadCadets();
+      }
       if (cadet.attendance && cadet.attendance.length > 0) {
         const latest = cadet.attendance[cadet.attendance.length - 1];
         document.getElementById('attendance-status').innerHTML = '<i class="fas fa-user-' + (latest.status === 'Present' ? 'check-circle' : 'times-circle') + '"></i> ' + latest.status;
@@ -419,6 +542,11 @@
     } else {
       window.location.href = 'login.html';
     }
+
+    // Search cadets in profile
+    document.getElementById('searchCadetsProfile')?.addEventListener('input', function(e) {
+      loadCadets(e.target.value);
+    });
   </script>
 </body>
 </html>

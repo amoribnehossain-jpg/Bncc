@@ -189,6 +189,60 @@
         right: auto;
       }
     }
+
+    /* Legacy Tribute Section */
+    .legacy-tribute {
+      padding: 4rem 0;
+    }
+
+    .legacy-header h2 {
+      font-size: clamp(1.8rem, 3.5vw, 2.2rem);
+    }
+
+    @media (max-width: 768px) {
+      .history-banner {
+        min-height: 300px;
+      }
+
+      .timeline-container::before {
+        left: 20px;
+      }
+
+      .timeline-item {
+        justify-content: flex-start !important;
+        padding-left: 50px;
+      }
+
+      .timeline-item:nth-child(odd) .timeline-card,
+      .timeline-item:nth-child(even) .timeline-card {
+        margin: 0;
+        width: 100%;
+        max-width: none;
+      }
+
+      .timeline-item:nth-child(odd) .timeline-card::before,
+      .timeline-item:nth-child(even) .timeline-card::before {
+        left: -50px;
+        right: auto;
+      }
+
+      .highlight-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .highlight-card {
+        padding: 20px;
+      }
+
+      .legacy-bar .container {
+        flex-direction: column;
+      }
+
+      .legacy-bar .stat-item {
+        margin-bottom: 1.5rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -243,6 +297,39 @@
     <div class="history-banner-content">
       <h1>Our Legacy & History</h1>
       <p>The proud journey of the Bangladesh National Cadet Corps.</p>
+    </div>
+  </section>
+
+  <!-- Featured Highlight: Flight Lieutenant Matiur Rahman -->
+  <section class="featured-highlight" data-aos="fade-up">
+    <div class="container" style="display: flex; justify-content: center;">
+      <div class="highlight-card" style="background: #ffffff; border-radius: 12px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1); border-top: 6px solid #38bdf8; padding: 40px; max-width: 1200px; margin: 2rem auto;">
+        <div class="highlight-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: flex-start;">
+          <!-- Left Column: Portrait -->
+          <div class="highlight-image" data-aos="fade-right">
+            <img src="images/matiur-rahman.jpg" alt="Flight Lieutenant Matiur Rahman" style="width: 100%; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+          </div>
+
+          <!-- Right Column: Text Content -->
+          <div class="highlight-content" data-aos="fade-left">
+            <span style="display: inline-block; background: #e0f2fe; color: #0284c7; padding: 0.4rem 1rem; border-radius: 9999px; font-size: 0.9rem; font-weight: 600; margin-bottom: 1.5rem;">Bir Sreshtho</span>
+
+            <h3 style="font-size: 1.5rem; color: #0f172a; font-weight: 700; margin-bottom: 1.5rem; line-height: 1.3;">Flight Lieutenant Matiur Rahman</h3>
+
+            <p style="color: #64748b; font-size: 1.05rem; line-height: 1.7; margin-bottom: 1rem;">Flight Lieutenant Matiur Rahman was a brave pilot of the Pakistan Air Force who made the ultimate sacrifice for the independence of Bangladesh.</p>
+
+            <p style="color: #64748b; font-size: 1.05rem; line-height: 1.7; margin-bottom: 1rem;">On August 20, 1971, he attempted a daring escape by hijacking a T-33 training aircraft to defect to India and join the Liberation War. Tragically, the plane crashed near Thakurgaon, and he embraced martyrdom.</p>
+
+            <p style="color: #64748b; font-size: 1.05rem; line-height: 1.7;">For his supreme sacrifice and unwavering patriotism, he was posthumously awarded the 'Bir Sreshtho', the highest gallantry award of Bangladesh. His legacy remains a shining example of courage for all Air Wing cadets.</p>
+          </div>
+        </div>
+
+        <!-- Group Photo -->
+        <div class="highlight-group-photo" style="text-align: center; margin-top: 3rem;">
+          <img src="images/air-force-officers.jpg" alt="Historical photograph of early Air Force officers" style="width: 100%; max-width: 800px; border-radius: 12px; border: 1px solid #e2e8f0; display: block; margin: 0 auto;">
+          <p style="color: #94a3b8; font-size: 0.95rem; margin-top: 0.75rem; font-style: italic;">Historical photograph of early Air Force officers.</p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -353,6 +440,39 @@
           <span class="timeline-year">1979</span>
           <h3>Then-President Ziaur Rahman merged the cadet corps to establish the Bangladesh National Cadet Corps (BNCC) through a government order.</h3>
         </div>
+      </div>
+
+      <div class="timeline-item" data-aos="fade-right">
+        <div class="timeline-card" style="background: #f0f9ff;">
+          <span class="timeline-year">Present Day</span>
+          <h3>The Legacy Continues</h3>
+          <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-top: 0.5rem;">Today, the BNCC Air Wing remains a beacon of discipline and excellence, training thousands of young cadets to serve the nation in aviation and beyond.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Timeline Terminator -->
+    <div style="position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);">
+      <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; background: #ffffff; border-radius: 50%; padding: 0.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+        <i class="fas fa-star" style="color: #38bdf8; font-size: 1.2rem;"></i>
+      </div>
+    </div>
+  </section>
+
+  <!-- By the Numbers / Legacy Summary Bar -->
+  <section class="legacy-bar" style="background: var(--white); padding: 3rem 0; margin-top: 3rem;">
+    <div class="container" style="display: flex; justify-content: space-around; max-width: 1200px; margin: 0 auto; gap: 2rem; flex-wrap: wrap; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
+      <div class="stat-item" style="text-align: center; flex: 1; min-width: 200px;">
+        <div style="font-size: 2.5rem; font-weight: 800; color: #38bdf8; line-height: 1;">100+</div>
+        <div style="color: var(--heading); font-size: 1rem; margin-top: 0.5rem;">Years of History<br><span style="color: var(--text-muted); font-size: 0.9rem;">since 1920</span></div>
+      </div>
+      <div class="stat-item" style="text-align: center; flex: 1; min-width: 200px;">
+        <div style="font-size: 2.5rem; font-weight: 800; color: #38bdf8; line-height: 1;">22</div>
+        <div style="color: var(--heading); font-size: 1rem; margin-top: 0.5rem;">Martyred Heroes<br><span style="color: var(--text-muted); font-size: 0.9rem;">in 1971</span></div>
+      </div>
+      <div class="stat-item" style="text-align: center; flex: 1; min-width: 200px;">
+        <div style="font-size: 2.5rem; font-weight: 800; color: #38bdf8; line-height: 1;">1</div>
+        <div style="color: var(--heading); font-size: 1rem; margin-top: 0.5rem;">Bir Sreshtho<br><span style="color: var(--text-muted); font-size: 0.9rem;">(Matiur Rahman)</span></div>
       </div>
     </div>
   </section>

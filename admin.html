@@ -212,6 +212,37 @@
   </div>
 
   <script>
+    // Security check: validate admin access at script start
+    (function() {
+      const raw = localStorage.getItem('bmarpc_cadet_jwt') || localStorage.getItem('bmarpc_cadet_token');
+      if (!raw) {
+        window.location.href = 'login.html';
+        return;
+      }
+      try {
+        const parsed = JSON.parse(raw);
+        const token = parsed.token || parsed;
+        // Check if this is a real JWT (not 'demo')
+        if (typeof token === 'string' && token !== 'demo' && token.includes('.')) {
+          const payload = JSON.parse(atob(token.split('.')[1]));
+          if (!payload.is_admin) {
+            alert('Access Denied');
+            window.location.href = 'profile.html';
+            return;
+          }
+        } else {
+          // Check stored cadet data for is_admin
+          if (!parsed.cadet || !parsed.cadet.is_admin) {
+            alert('Access Denied');
+            window.location.href = 'profile.html';
+            return;
+          }
+        }
+      } catch (e) {
+        window.location.href = 'login.html';
+      }
+    })();
+
     const API_URL = 'https://bncc.onrender.com';
 
     // Preview selected notice image

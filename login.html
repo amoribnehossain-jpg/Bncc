@@ -395,7 +395,9 @@
         const data = await res.json();
 
         if (res.ok) {
+          // Persist the JWT (carries id, cadetNo, is_admin) plus cadet profile.
           localStorage.setItem('bmarpc_cadet_token', JSON.stringify({ token: data.token, cadet: data.cadet }));
+          localStorage.setItem('bmarpc_cadet_jwt', data.token);
           response.innerHTML = '<i class="fas fa-check-circle"></i> Login successful! Redirecting...';
           response.className = 'response success';
           setTimeout(() => window.location.href = 'profile.html', 1500);
